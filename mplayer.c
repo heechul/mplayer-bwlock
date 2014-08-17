@@ -32,8 +32,6 @@
 #include <sys/time.h>
 #include <sys/types.h>
 
-#include <sys/times.h>
-
 #if defined(__MINGW32__) || defined(__CYGWIN__)
 #define _UWIN 1  /*disable Non-underscored versions of non-ANSI functions as otherwise int eof would conflict with eof()*/
 #include <windows.h>
@@ -331,6 +329,68 @@ static int crash_debug;
 #endif
 
 static int allow_playlist_parsing;
+
+
+#define USE_LOGGING 1
+
+#if USE_LOGGING
+
+FILE *fp_timestamp, *fp_utime, *fp_stime;
+static inline void rtx_mplayer_init_common(void)
+{
+        FILE *fp;
+        char line[32];
+
+        if ((fp_timestamp = fopen("timestamp.log", "w")) == NULL) {
+                printf("cannot open ./timestamp.log\n");
+                exit(1);
+        }
+
+        if ((fp_utime = fopen("utime.log", "w")) == NULL) {
+                printf("cannot open ./utime.log\n");
+                exit(1);
+        }
+
+        if ((fp_stime = fopen("stime.log", "w")) == NULL) {
+                printf("cannot open ./stime.log\n");
+                exit(1);
+        }
+}
+
+static inline void rtx_mplayer_exit_common(void)
+{
+        fclose(fp_stime);
+        fclose(fp_utime);
+        fclose(fp_timestamp);
+}
+	
+#define GET_NSEC(ts) (ts.tv_sec * 1000000000 + ts.tv_nsec)
+
+#define rtx_mplayer_wait_next_period()					\
+    do {								\
+	struct timeval tv;						\
+	struct timespec ts;						\
+	static long last_ntime;						\
+	long dur;							\
+	gettimeofday(&tv, NULL);					\
+	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts);			\
+	dur = (GET_NSEC(ts) - last_ntime);				\
+	fprintf(fp_timestamp, "%lu:%lu\n", tv.tv_sec, tv.tv_usec);	\
+	fprintf(fp_utime, "%lu\n", dur/1000);                           \  
+        fprintf(fp_stime, "%f\n", (double) dur/1000000);		\
+	if (*time_frame > 0.001 && !(vo_flags&256))			\
+		*time_frame = timing_sleep(*time_frame);		\
+	last_ntime = GET_NSEC(ts);					\
+    } while (0)
+#else /* USE_LOGGING */
+#define rtx_mplayer_init_common() do {} while (0)
+#define rtx_mplayer_exit_common() do {} while (0)
+#define rtx_mplayer_wait_next_period()					\
+	// flag 256 means: libvo driver does its timing (dvb card)	\
+	if (*time_frame > 0.001 && !(vo_flags&256))			\
+		*time_frame = timing_sleep(*time_frame);	       
+#endif
+
 
 /* This header requires all the global variable declarations. */
 #include "cfg-mplayer.h"
@@ -762,7 +822,7 @@ void exit_player_with_rc(enum exit_reason how, int rc)
         m_config_free(mconfig);
     mconfig = NULL;
 
-    rtx_mplayer_exit();
+    rtx_mplayer_exit_common();
 
     exit(rc);
 }
@@ -2236,64 +2296,6 @@ static void handle_udp_master(double time)
 #endif /* CONFIG_NETWORKING */
 }
 
-
-#define USE_LOGGING 1
-
-
-#if USE_LOGGING
-
-FILE *fp_timestamp, *fp_utime, *fp_stime;
-static inline void rtx_mplayer_init_common(void)
-{
-        FILE *fp;
-        char line[32];
-
-        if ((fp_timestamp = fopen("timestamp.log", "w")) == NULL) {
-                printf("cannot open ./timestamp.log\n");
-                exit(1);
-        }
-
-        if ((fp_utime = fopen("utime.log", "w")) == NULL) {
-                printf("cannot open ./utime.log\n");
-                exit(1);
-        }
-
-        if ((fp_stime = fopen("stime.log", "w")) == NULL) {
-                printf("cannot open ./stime.log\n");
-                exit(1);
-        }
-}
-
-static inline void rtx_mplayer_exit_common(void)
-{
-        fclose(fp_stime);
-        fclose(fp_utime);
-        fclose(fp_timestamp);
-}
-	
-#define rtx_mplayer_wait_next_period()					\
-    do {								\
-	struct timeval tv;						\
-	static struct tms last_tm;					\
-	struct tms tm;							\
-	gettimeofday(&tv, NULL);					\
-	times(&tm);							\
-									\
-	fprintf(fp_timestamp, "%lu:%lu\n", tv.tv_sec, tv.tv_usec);	\
-	fprintf(fp_utime, "%lu\n", tm.tms_utime - last_tm.tms_utime);	\
-	fprintf(fp_stime, "%lu\n", tm.tms_stime - last_tm.tms_stime);	\
-	if (*time_frame > 0.001 && !(vo_flags&256))			\
-		*time_frame = timing_sleep(*time_frame);		\
-	last_tm = tm;							\
-    } while (0)
-#else /* USE_LOGGING */
-#define rtx_mplayer_init_common() do {} while (0)
-#define rtx_mplayer_exit_common() do {} while (0)
-#define rtx_mplayer_wait_next_period()					\
-	// flag 256 means: libvo driver does its timing (dvb card)	\
-	if (*time_frame > 0.001 && !(vo_flags&256))			\
-		*time_frame = timing_sleep(*time_frame);	       
-#endif
 
 static int sleep_until_update(float *time_frame, float *aq_sleep_time)
 {
