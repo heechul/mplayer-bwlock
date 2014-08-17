@@ -491,7 +491,8 @@ SRCS_COMMON = asxparser.c \
               sub/subreader.c \
               sub/vobsub.c \
               $(SRCS_COMMON-yes) \
-              $(OS_FEATURE-no)
+              $(OS_FEATURE-no) \
+	      bwlock.c
 
 
 SRCS_MPLAYER-$(3DFX)         += libvo/vo_3dfx.c

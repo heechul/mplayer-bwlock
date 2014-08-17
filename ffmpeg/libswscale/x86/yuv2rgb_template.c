@@ -361,6 +361,12 @@ static inline int RENAME(yuv420_bgr24)(SwsContext *c, const uint8_t *src[],
     MOVNTQ "   %%mm5,       16(%1)\n\t"      \
     MOVNTQ "   %%mm"alpha", 24(%1)\n\t"      \
 
+#define USE_BW_LOCK 1
+
+#if USE_BW_LOCK 
+#include "bwlock.h"
+#endif
+
 #if !COMPILE_TEMPLATE_MMX2
 static inline int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
                                        int srcStride[],
@@ -368,6 +374,9 @@ static inline int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
                                        uint8_t *dst[], int dstStride[])
 {
     int y, h_size, vshift;
+#if USE_BW_LOCK
+    bw_lock(9000, SOFT);
+#endif
 
     YUV2RGB_LOOP(4)
 
@@ -380,6 +389,9 @@ static inline int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
     YUV2RGB_ENDLOOP(4)
     YUV2RGB_OPERANDS
     YUV2RGB_ENDFUNC
+#if USE_BW_LOCK
+    bw_unlock(NULL);	    
+#endif
 }
 
 #if HAVE_7REGS && CONFIG_SWSCALE_ALPHA

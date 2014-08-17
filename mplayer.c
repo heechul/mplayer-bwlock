@@ -3779,6 +3779,7 @@ goto_enable_cache:
 
 #if USE_LOGGING 
 	rtx_mplayer_init_common();
+	printf("LOGGING: FPS: %f\n", mpctx->sh_video->fps);
 #endif
         while (!mpctx->eof) {
             float aq_sleep_time = 0;
