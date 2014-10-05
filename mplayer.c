@@ -138,6 +138,8 @@
 #include "stream/stream_dvd.h"
 #endif
 
+#include "bwlock.h"
+
 int slave_mode;
 int player_idle_mode;
 int quiet;
@@ -330,12 +332,13 @@ static int crash_debug;
 
 static int allow_playlist_parsing;
 
+int g_use_bwlock = 0;
 
 #define USE_LOGGING 1
 
 #if USE_LOGGING
 
-FILE *fp_timestamp, *fp_utime, *fp_stime;
+FILE *fp_timestamp, *fp_utime, *fp_stime, *fp_itime;
 static inline void rtx_mplayer_init_common(void)
 {
         FILE *fp;
@@ -355,13 +358,21 @@ static inline void rtx_mplayer_init_common(void)
                 printf("cannot open ./stime.log\n");
                 exit(1);
         }
+
+        if ((fp_itime = fopen("itime.log", "w")) == NULL) {
+                printf("cannot open ./itime.log\n");
+                exit(1);
+        }
+
 }
 
 static inline void rtx_mplayer_exit_common(void)
 {
-        fclose(fp_stime);
-        fclose(fp_utime);
-        fclose(fp_timestamp);
+        if (fp_stime) fclose(fp_stime);
+        if (fp_utime) fclose(fp_utime);
+        if (fp_timestamp) fclose(fp_timestamp);
+        if (fp_itime) fclose(fp_itime);
+	
 }
 	
 #define GET_NSEC(ts) (ts.tv_sec * 1000000000 + ts.tv_nsec)
@@ -378,6 +389,7 @@ static inline void rtx_mplayer_exit_common(void)
 	fprintf(fp_timestamp, "%lu:%lu\n", tv.tv_sec, tv.tv_usec);	\
 	fprintf(fp_utime, "%lu\n", dur/1000);                           \  
         fprintf(fp_stime, "%f\n", (double) dur/1000000);		\
+        fprintf(fp_itime, "%f\n", *time_frame);				\
 	if (*time_frame > 0.001 && !(vo_flags&256))			\
 		*time_frame = timing_sleep(*time_frame);		\
 	last_ntime = GET_NSEC(ts);					\
@@ -2827,7 +2839,11 @@ int main(int argc, char *argv[])
     int opt_exit = 0; // Flag indicating whether MPlayer should exit without playing anything.
     int profile_config_loaded;
     int i;
-
+   
+    char *tmp;
+    tmp = getenv("USE_BWLOCK_ALL"); 
+    if (tmp) g_use_bwlock = strtol(tmp, NULL, 0);
+    printf("USE_BWLOCK_ALL=%d\n", g_use_bwlock);
     common_preinit();
 
     // Create the config context and register the options
@@ -3781,6 +3797,12 @@ goto_enable_cache:
 	rtx_mplayer_init_common();
 	printf("LOGGING: FPS: %f\n", mpctx->sh_video->fps);
 #endif
+
+	if (g_use_bwlock) {
+		printf("call BWLOCK all the time\n");
+		bw_lock(); /* always holds the lock */
+	}
+
         while (!mpctx->eof) {
             float aq_sleep_time = 0;
 

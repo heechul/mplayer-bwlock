@@ -375,7 +375,7 @@ static inline int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
 {
     int y, h_size, vshift;
 #if USE_BW_LOCK
-    bw_lock(9000, SOFT);
+    if (getenv("USE_BWLOCK_FINE")) bw_lock();
 #endif
 
     YUV2RGB_LOOP(4)
@@ -388,10 +388,10 @@ static inline int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],
 
     YUV2RGB_ENDLOOP(4)
     YUV2RGB_OPERANDS
-    YUV2RGB_ENDFUNC
 #if USE_BW_LOCK
-    bw_unlock(NULL);	    
+    if (getenv("USE_BWLOCK_FINE")) bw_unlock();	    
 #endif
+    YUV2RGB_ENDFUNC
 }
 
 #if HAVE_7REGS && CONFIG_SWSCALE_ALPHA
