@@ -31,7 +31,7 @@
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/types.h>
-
+#include <sched.h>
 #if defined(__MINGW32__) || defined(__CYGWIN__)
 #define _UWIN 1  /*disable Non-underscored versions of non-ANSI functions as otherwise int eof would conflict with eof()*/
 #include <windows.h>
@@ -2852,6 +2852,14 @@ int main(int argc, char *argv[])
     m_config_register_options(mconfig, common_opts);
     mp_input_register_options(mconfig);
 
+    if (argc > 1 && argv[1] && (!strcmp(argv[1], "-rt"))) {
+	    struct sched_param param;
+	    argc--; argv++;
+	    param.sched_priority = 1;
+	    if(sched_setscheduler(0, SCHED_RR, &param) == -1) {
+		perror("sched_setscheduler failed");
+	    }
+    }
     // Preparse the command line
     m_config_preparse_command_line(mconfig, argc, argv);
 
