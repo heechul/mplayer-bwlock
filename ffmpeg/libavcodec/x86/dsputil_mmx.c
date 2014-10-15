@@ -2032,14 +2032,18 @@ static void gmc_mmx(uint8_t *dst, uint8_t *src,
 }
 #endif
 
+#include "bwlock.h"
+
 #define PREFETCH(name, op)                      \
 static void name(void *mem, int stride, int h)  \
 {                                               \
     const uint8_t *p = mem;                     \
+    if (getenv("USE_BWLOCK_FINE")) bw_lock();	\
     do {                                        \
         __asm__ volatile (#op" %0" :: "m"(*p)); \
         p += stride;                            \
     } while (--h);                              \
+    if (getenv("USE_BWLOCK_FINE")) bw_unlock();	\
 }
 
 PREFETCH(prefetch_mmx2,  prefetcht0)
