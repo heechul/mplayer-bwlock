@@ -15,7 +15,7 @@
  * with MPlayer; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
-
+#define _GNU_SOURCE         /* See feature_test_macros(7) */
 #include "config.h"
 
 #include <errno.h>
@@ -344,26 +344,54 @@ static inline void rtx_mplayer_init_common(void)
         FILE *fp;
         char line[32];
 
-        if ((fp_timestamp = fopen("timestamp.log", "w")) == NULL) {
-                printf("cannot open ./timestamp.log\n");
-                exit(1);
-        }
+	int cpuid = sched_getcpu();
 
-        if ((fp_utime = fopen("utime.log", "w")) == NULL) {
-                printf("cannot open ./utime.log\n");
-                exit(1);
-        }
+	if (cpuid == 0) {
+		if ((fp_timestamp = fopen("timestamp.log", "w")) == NULL) {
+			printf("cannot open ./timestamp.log\n");
+			exit(1);
+		}
 
-        if ((fp_stime = fopen("stime.log", "w")) == NULL) {
-                printf("cannot open ./stime.log\n");
-                exit(1);
-        }
+		if ((fp_utime = fopen("utime.log", "w")) == NULL) {
+			printf("cannot open ./utime.log\n");
+			exit(1);
+		}
 
-        if ((fp_itime = fopen("itime.log", "w")) == NULL) {
-                printf("cannot open ./itime.log\n");
-                exit(1);
-        }
+		if ((fp_stime = fopen("stime.log", "w")) == NULL) {
+			printf("cannot open ./stime.log\n");
+			exit(1);
+		}
 
+		if ((fp_itime = fopen("itime.log", "w")) == NULL) {
+			printf("cannot open ./itime.log\n");
+			exit(1);
+		}
+	} else {
+		char fname[128];
+		sprintf(fname, "timestamp.log.%d", cpuid);
+		if ((fp_timestamp = fopen(fname, "w")) == NULL) {
+			printf("cannot open ./timestamp.log\n");
+			exit(1);
+		}
+
+		sprintf(fname, "utime.log.%d", cpuid);
+		if ((fp_utime = fopen(fname, "w")) == NULL) {
+			printf("cannot open ./utime.log\n");
+			exit(1);
+		}
+
+		sprintf(fname, "stime.log.%d", cpuid);
+		if ((fp_stime = fopen(fname, "w")) == NULL) {
+			printf("cannot open ./stime.log\n");
+			exit(1);
+		}
+
+		sprintf(fname, "itime.log.%d", cpuid);
+		if ((fp_itime = fopen(fname, "w")) == NULL) {
+			printf("cannot open ./itime.log\n");
+			exit(1);
+		}
+	}
 }
 
 static inline void rtx_mplayer_exit_common(void)
@@ -3808,7 +3836,7 @@ goto_enable_cache:
 
 	if (g_use_bwlock) {
 		printf("call BWLOCK all the time\n");
-		bw_lock(); /* always holds the lock */
+		syscall(SYS_bwlock, 0, 1); /* always holds the lock */
 	}
 
         while (!mpctx->eof) {
