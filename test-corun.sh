@@ -2,11 +2,12 @@
 
 MGDIR=/sys/kernel/debug/memguard
 SCHED=rt  #normal
-# EXTRATAG=2bws-1mplayers-vox11-`date +"%m%d"`
-# VIDOUT=""
-# EXTRATAG=4bws-4mplayers-vox11-`date +"%m%d"`
-EXTRATAG=4bws-4mplayers-vonull-`date +"%m%d"`
-VIDOUT="-vo null"
+#EXTRATAG=2bws-1mplayers-vox11-`date +"%m%d"`
+EXTRATAG=3bws-3mplayers-vox11-`date +"%m%d"`
+VIDOUT=""
+#EXTRATAG=4bws-4mplayers-vox11-`date +"%m%d"`
+# EXTRATAG=4bws-4mplayers-vonull-`date +"%m%d"`
+# VIDOUT="-vo null"
 # MG_BWS="450 450 100 100"
 MG_BWS="300 300 300 300"
 
@@ -44,8 +45,17 @@ do_load_spec()
 
 do_load()
 {
-    local cores="0 1 2 3"
+    local cores
     acctype=$1
+    if [[ $EXTRATAG == *"4bws"* ]]; then 
+	cores="0 1 2 3"
+    elif [[ $EXTRATAG == *"3bws"* ]]; then 
+	cores="0 2 3"
+    elif [[ $EXTRATAG == *"2bws"* ]]; then 
+	cores="2 3"
+    else
+	error "cores=$cores"
+    fi
     for c in $cores; do
 	./bandwidth -c $c -t 100000 -a $acctype -f corun-bw.log &
     done
@@ -57,19 +67,26 @@ run_bench()
     echo "run mplayer on C0"
     echo "" > /sys/kernel/debug/tracing/trace
 
-    # local pgm="mplayer"
-    local pgm="mplayer-bwlockcoarse"
+    local pgm="mplayer-nobwlock"
     if [ "$USE_BWLOCK_FINE" = "1" ]; then
-    	pgm="mplayer-bwlockfine"
+    	local pgm="mplayer-bwlockfine"
+    # elif [ "$USE_BWLOCK_ALL" = "1" ]; then 
+    #   local pgm="mplayer-bwlockcoarse"
     fi
     if [ "$SCHED" = "rt" ]; then
 	pgm="$pgm -rt"
     fi
-    taskset -c 1 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
-    taskset -c 2 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
-    taskset -c 3 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
+    if [[ $EXTRATAG == *"4mplayers"* ]]; then 
+	taskset -c 1 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
+	taskset -c 2 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
+	taskset -c 3 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
+    elif [[ $EXTRATAG == *"3mplayers"* ]]; then 
+	taskset -c 2 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
+	taskset -c 3 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
+    fi
     # time taskset -c 0 perf record -e cache-misses -o perf.mplayer.llcmisses ./$pgm 1080p.mp4 $VIDOUT
-    time taskset -c 0 ./$pgm 1080p.mp4 $VIDOUT
+    time taskset -c 0 perf record -o perf.mplayer.cycles ./$pgm 1080p.mp4 $VIDOUT
+    # time taskset -c 0 ./$pgm 1080p.mp4 $VIDOUT
     
     cat /sys/kernel/debug/tracing/trace > mplayer.trace
 }
@@ -77,8 +94,8 @@ run_bench()
 end_bench()
 {
     logdir=$1
-    killall -2 bandwidth mplayer-bwlockcoarse mplayer-bwlockfine mplayer
-    do_graph
+    killall -2 bandwidth mplayer-bwlockcoarse mplayer-bwlockfine mplayer-nobwlock mplayer
+    # do_graph
     if [ ! -z "$logdir" ]; then
 	[ ! -d "$logdir" ] && mkdir -v $logdir
 	tail -n 5900 ~/timing-X.txt > $logdir/timing-X.txt
@@ -124,12 +141,12 @@ test_mg()
 # fine grained locking
 test_bwlock_fine() 
 {
-    rmmod memguard
-    insmod ./memguard.ko
+#    rmmod memguard
+#    insmod ./memguard.ko
     do_load write
     USE_BWLOCK_FINE=1 USE_TIMING=1 run_bench > play.log 2> timing-mplayer.txt
     end_bench log_${EXTRATAG}_bwlock_fine
-    rmmod memguard
+#    rmmod memguard
 }
 
 # whole bwlock
@@ -226,18 +243,18 @@ copy_data()
 Xpid=`pidof X`
 echo "set X ($Xpid) to C1" 
 taskset -p -c 1 $Xpid
-#if [ "$SCHED" = "rt" ]; then
-#    if chrt -p -f 1 $Xpid; then
-#	echo "X is running in RT priority"
-#    else
-#	echo "ERR: X is running at normal priority"
-#    fi
-#fi
+if [ "$SCHED" = "rt" ]; then
+   if chrt -p -f 1 $Xpid; then
+	echo "X is running in RT priority"
+   else
+	echo "ERR: X is running at normal priority"
+   fi
+fi
 
 #test_solo
-test_corun
+#test_corun
 # test_bwlock_all
-# test_bwlock_fine
+test_bwlock_fine
 # test_mg
 
 # for dir in log_${EXTRATAG}_*; do 
@@ -255,11 +272,13 @@ for d in solo corun mg-br-ss bwlock_fine bwlock_all; do
     if [ ! -d "${tag}_$d" ]; then
         continue
     fi
-    ./fps.pl ${tag}_$d/timestamp.log > ${tag}_$d/fps.dat
+    # ./fps.pl ${tag}_$d/timestamp.log > ${tag}_$d/fps.dat
     ./printstat.py -d 41.0 ${tag}_$d/stime.log > ${tag}_$d/stat.dat
     A=`cat ${tag}_$d/stat.dat | grep "avg:" | awk '{ print $2 }'`
     B=`cat ${tag}_$d/corun-bw.log | awk '{s+=$2} END {print s}'`
-    echo $d $A $B
+    ./printstat.py -d 41.0 ${tag}_$d/utime.log > ${tag}_$d/stat_utime.dat
+    C=`cat ${tag}_$d/stat_utime.dat | grep "avg:" | awk '{ print $2 }'`
+    echo $d $A $B $C
 done
 
 # plot_stime_distribution
