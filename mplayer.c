@@ -142,7 +142,7 @@
 
 int slave_mode;
 int player_idle_mode;
-int quiet;
+int quiet = 0; // heechul
 int enable_mouse_movements;
 float start_volume = -1;
 double start_pts   = MP_NOPTS_VALUE;
@@ -404,23 +404,26 @@ static inline void rtx_mplayer_exit_common(void)
 }
 	
 #define GET_NSEC(ts) (ts.tv_sec * 1000000000 + ts.tv_nsec)
+#define GET_US(tv) (tv.tv_sec * 1000000 + tv.tv_usec)
 
 #define rtx_mplayer_wait_next_period()					\
     do {								\
-	struct timeval tv;						\
 	struct timespec ts;						\
+	static struct timeval tv,tv2;					\
 	static long last_ntime;						\
 	long dur;							\
-	gettimeofday(&tv, NULL);					\
 	clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts);			\
 	dur = (GET_NSEC(ts) - last_ntime);				\
-	fprintf(fp_timestamp, "%lu:%lu\n", tv.tv_sec, tv.tv_usec);	\
-	fprintf(fp_utime, "%lu\n", dur/1000);                           \  
-        fprintf(fp_stime, "%f\n", (double) dur/1000000);		\
+        if (last_ntime) fprintf(fp_stime, "%f\n", (double)dur/1000000); \
         fprintf(fp_itime, "%f\n", *time_frame);				\
+	gettimeofday(&tv2, NULL);					\
+	dur = GET_US(tv2) - GET_US(tv);					\
+	if (last_ntime) fprintf(fp_utime, "%f\n", (double)dur/1000);	\
 	if (*time_frame > 0.001 && !(vo_flags&256))			\
 		*time_frame = timing_sleep(*time_frame);		\
+	fprintf(fp_timestamp, "%lu%06lu\n", tv.tv_sec, tv.tv_usec);	\
 	last_ntime = GET_NSEC(ts);					\
+	gettimeofday(&tv, NULL);					\
     } while (0)
 #else /* USE_LOGGING */
 #define rtx_mplayer_init_common() do {} while (0)
@@ -3899,7 +3902,9 @@ goto_enable_cache:
                         mpctx->startup_decode_retry--;
                     }
                     mpctx->startup_decode_retry = 0;
-                    mp_dbg(MSGT_AVSYNC, MSGL_DBG2, "*** ftime=%5.3f ***\n", frame_time);
+                    mp_dbg(MSGT_AVSYNC, MSGL_DBG2, "*** ftime=%5.3f ***\n", frame_time); 
+		    // printf("frame: %5.3f\n", frame_time); // HEECHUL
+
                     if (mpctx->sh_video->vf_initialized < 0) {
                         mp_msg(MSGT_CPLAYER, MSGL_FATAL, MSGTR_NotInitializeVOPorVO);
                         mpctx->eof = 1;
@@ -3949,7 +3954,7 @@ goto_enable_cache:
 
                 if (!skip_timing)
                     frame_time_remaining = sleep_until_update(&mpctx->time_frame, &aq_sleep_time);
-
+		// printf("frame_time_remaining: %d\n", frame_time_remaining); // HEECHUL
 //====================== FLIP PAGE (VIDEO BLT): =========================
 
                 if (!edl_needs_reset) {
@@ -3996,6 +4001,7 @@ goto_enable_cache:
                 if (!frame_time_remaining && is_at_end(mpctx, &end_at,
                                                        mpctx->sh_video->pts))
                     mpctx->eof = PT_NEXT_ENTRY;
+
             } // end if(mpctx->sh_video)
 
 #ifdef CONFIG_DVDNAV

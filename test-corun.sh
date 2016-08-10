@@ -2,14 +2,24 @@
 
 MGDIR=/sys/kernel/debug/memguard
 SCHED=rt  #normal
-#EXTRATAG=2bws-1mplayers-vox11-`date +"%m%d"`
-EXTRATAG=3bws-3mplayers-vox11-`date +"%m%d"`
-VIDOUT=""
+EXTRATAG=2bws-1mplayers-vox11-`date +"%m%d"`
+#EXTRATAG=3bws-3mplayers-vox11-`date +"%m%d"`
 #EXTRATAG=4bws-4mplayers-vox11-`date +"%m%d"`
+#EXTRATAG=4bws-2mplayers-vox11-`date +"%m%d"`
+#EXTRATAG=3bws-2mplayers-vox11-`date +"%m%d"`
+#EXTRATAG=1bws-2mplayers-vox11-`date +"%m%d"`
+VIDOUT=""
 # EXTRATAG=4bws-4mplayers-vonull-`date +"%m%d"`
 # VIDOUT="-vo null"
-# MG_BWS="450 450 100 100"
-MG_BWS="300 300 300 300"
+MG_BWS="500 500 100 100"
+# MG_BWS="300 300 300 300"
+
+if [ ! -z "$1" ]; then
+    EXTRATAG="$1"
+fi
+
+echo "experiment for $EXTRATAG"
+
 
 echo 16384 > /sys/kernel/debug/tracing/buffer_size_kb
 
@@ -53,6 +63,10 @@ do_load()
 	cores="0 2 3"
     elif [[ $EXTRATAG == *"2bws"* ]]; then 
 	cores="2 3"
+    elif [[ $EXTRATAG == *"1bws"* ]]; then 
+	cores="3"
+    elif [[ $EXTRATAG == *"0bws"* ]]; then 
+	cores=""
     else
 	error "cores=$cores"
     fi
@@ -62,8 +76,16 @@ do_load()
 }
 
 
+drop_cache()
+{
+    sync
+    echo 1 > /proc/sys/vm/drop_caches # free file caches
+}
+
 run_bench()
 {
+    drop_cache
+
     echo "run mplayer on C0"
     echo "" > /sys/kernel/debug/tracing/trace
 
@@ -83,6 +105,8 @@ run_bench()
     elif [[ $EXTRATAG == *"3mplayers"* ]]; then 
 	taskset -c 2 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
 	taskset -c 3 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
+    elif [[ $EXTRATAG == *"2mplayers"* ]]; then 
+	taskset -c 2 ./$pgm 1080p.mp4 $VIDOUT >& /dev/null &
     fi
     # time taskset -c 0 perf record -e cache-misses -o perf.mplayer.llcmisses ./$pgm 1080p.mp4 $VIDOUT
     time taskset -c 0 perf record -o perf.mplayer.cycles ./$pgm 1080p.mp4 $VIDOUT
@@ -95,7 +119,7 @@ end_bench()
 {
     logdir=$1
     killall -2 bandwidth mplayer-bwlockcoarse mplayer-bwlockfine mplayer-nobwlock mplayer
-    # do_graph
+    do_graph
     if [ ! -z "$logdir" ]; then
 	[ ! -d "$logdir" ] && mkdir -v $logdir
 	tail -n 5900 ~/timing-X.txt > $logdir/timing-X.txt
@@ -143,9 +167,17 @@ test_bwlock_fine()
 {
 #    rmmod memguard
 #    insmod ./memguard.ko
+    local bwlockmode=$1
+    if [ "$bwlockmode" = "shared" ]; then
+	echo bwlockmode 0 > /sys/kernel/debug/memguard/control
+	cat /sys/kernel/debug/memguard/control | grep bwlockmode
+    elif [ "$bwlockmode" = "exclusive" ]; then
+	echo bwlockmode 1 > /sys/kernel/debug/memguard/control
+	cat /sys/kernel/debug/memguard/control | grep bwlockmode
+    fi
     do_load write
     USE_BWLOCK_FINE=1 USE_TIMING=1 run_bench > play.log 2> timing-mplayer.txt
-    end_bench log_${EXTRATAG}_bwlock_fine
+    end_bench log_${EXTRATAG}_bwlock_fine-$bwlockmode
 #    rmmod memguard
 }
 
@@ -254,8 +286,11 @@ fi
 #test_solo
 #test_corun
 # test_bwlock_all
-test_bwlock_fine
-# test_mg
+
+
+#test_bwlock_fine shared
+#test_bwlock_fine exclusive
+test_mg
 
 # for dir in log_${EXTRATAG}_*; do 
 #     mkdir -p $dir || echo "WARN: overwrite"
@@ -266,8 +301,8 @@ test_bwlock_fine
 # done
 
 tag="log_${EXTRATAG}"
-echo $tag
-for d in solo corun mg-br-ss bwlock_fine bwlock_all; do
+echo $tag "name avg bw | 95pct stdev dmiss | avg(stime)"
+for d in solo corun mg-br-ss bwlock_fine bwlock_fine-shared bwlock_fine-exclusive bwlock_all; do
     # cat $d/corun-bw.log
     if [ ! -d "${tag}_$d" ]; then
         continue
@@ -278,7 +313,11 @@ for d in solo corun mg-br-ss bwlock_fine bwlock_all; do
     B=`cat ${tag}_$d/corun-bw.log | awk '{s+=$2} END {print s}'`
     ./printstat.py -d 41.0 ${tag}_$d/utime.log > ${tag}_$d/stat_utime.dat
     C=`cat ${tag}_$d/stat_utime.dat | grep "avg:" | awk '{ print $2 }'`
-    echo $d $A $B $C
+    D=`cat ${tag}_$d/stat_utime.dat | grep "95pctile:" | awk '{ print $2 }'`
+    G=`cat ${tag}_$d/stat_utime.dat | grep "median:" | awk '{ print $2 }'`
+    E=`cat ${tag}_$d/stat_utime.dat | grep "stdev:" | awk '{ print $2 }'`
+    F=`cat ${tag}_$d/stat_utime.dat | grep "ratio:" | awk '{ print $4 }'`
+    printf "%25s %2.2f %d | %2.2f %2.2f %2.2f %2.2f| %2.2f\n" $d $C $B $D $G $E $F $A
 done
 
 # plot_stime_distribution
