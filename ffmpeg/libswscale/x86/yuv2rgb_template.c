@@ -361,7 +361,7 @@ static inline int RENAME(yuv420_bgr24)(SwsContext *c, const uint8_t *src[],
     MOVNTQ "   %%mm5,       16(%1)\n\t"      \
     MOVNTQ "   %%mm"alpha", 24(%1)\n\t"      \
 
-#include "bwlock.h"
+#include "../../../bwlock.h"
 
 #if !COMPILE_TEMPLATE_MMX2
 static inline int RENAME(yuv420_rgb32)(SwsContext *c, const uint8_t *src[],

@@ -44,8 +44,8 @@ CFLAGS_STACKREALIGN      =
 CFLAGS_SVGALIB_HELPER    = 
 CFLAGS_TREMOR_LOW        = 
 
-EXTRALIBS          = -Wl,-z,noexecstack -lm  -ffast-math   -lncurses -lpng -lz -ljpeg -lasound -ldl -lpthread -L/usr/lib/x86_64-linux-gnu -lfreetype -lz -lfontconfig  -lz -ltheoradec -logg -lopencore-amrnb -lopencore-amrwb -lxvidcore -lpthread -ldl -rdynamic -L/usr/lib/x86_64-linux-gnu  
-EXTRALIBS_MPLAYER  =  -lXext -lX11 -lpthread -lXinerama -lcaca -lSDL -lGL -ldl -lpulse -lfaac -lmp3lame
+EXTRALIBS          = -Wl,-z,noexecstack -lm  -ffast-math   -lncurses -lpng -lz -ljpeg -lasound -ldl -lpthread -L/usr/lib/x86_64-linux-gnu -lfreetype -lz -lpng12 -lfontconfig  -lz -lbz2 -ltheoradec -logg -lrtmp -lopencore-amrnb -lopencore-amrwb -lxvidcore -lpthread -ldl -rdynamic -L/usr/lib/x86_64-linux-gnu  
+EXTRALIBS_MPLAYER  =  -lXext -lX11 -lpthread -lXss -lXinerama -lXxf86vm -lcaca -lSDL -lGL -ldl -lpulse -lfaac -lmp3lame
 EXTRALIBS_MENCODER =  -lfaac -lmp3lame
 
 GETCH = getch2.c
@@ -298,11 +298,11 @@ CONFIG_SINEWIN = yes
 
 
 CONFIG_MPEGAUDIO_HP = yes
-!CONFIG_LIBRTMP = yes
-CONFIG_LIBRTMP  = no
+!CONFIG_LIBRTMP = no
+CONFIG_LIBRTMP  = yes
 
 CONFIG_AC3DSP   = yes
-CONFIG_BZLIB    = no
+CONFIG_BZLIB    = yes
 CONFIG_CRYSTALHD= no
 CONFIG_ENCODERS = yes
 CONFIG_GPL      = yes
@@ -1078,8 +1078,14 @@ CONFIG_MD5_PROTOCOL=yes
 CONFIG_PIPE_PROTOCOL=yes
 CONFIG_RTMP_PROTOCOL=yes
 CONFIG_RTP_PROTOCOL=yes
+CONFIG_SCTP_PROTOCOL=yes
 CONFIG_TCP_PROTOCOL=yes
 CONFIG_UDP_PROTOCOL=yes
+CONFIG_LIBRTMP_PROTOCOL=yes
+CONFIG_LIBRTMPE_PROTOCOL=yes
+CONFIG_LIBRTMPS_PROTOCOL=yes
+CONFIG_LIBRTMPT_PROTOCOL=yes
+CONFIG_LIBRTMPTE_PROTOCOL=yes
 CONFIG_AAC_ADTSTOASC_BSF=yes
 CONFIG_CHOMP_BSF=yes
 CONFIG_DUMP_EXTRADATA_BSF=yes

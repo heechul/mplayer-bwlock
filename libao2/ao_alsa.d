@@ -1,5 +1,5 @@
-libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
+libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/stdc-predef.h \
+ /usr/include/errno.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
@@ -15,16 +15,19 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/sigset.h \
  /usr/include/x86_64-linux-gnu/bits/select2.h /usr/include/stdlib.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/endian.h \
  /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
  /usr/include/x86_64-linux-gnu/sys/types.h \
  /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h /usr/include/ctype.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h /usr/include/ctype.h \
  /usr/include/xlocale.h /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/huge_val.h \
  /usr/include/x86_64-linux-gnu/bits/huge_valf.h \
@@ -49,10 +52,12 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl2.h /usr/include/assert.h \
  /usr/include/x86_64-linux-gnu/sys/poll.h \
- /usr/include/x86_64-linux-gnu/bits/poll.h /usr/include/alsa/asoundef.h \
+ /usr/include/x86_64-linux-gnu/bits/poll.h \
+ /usr/include/x86_64-linux-gnu/bits/poll2.h /usr/include/alsa/asoundef.h \
  /usr/include/alsa/version.h /usr/include/alsa/global.h \
  /usr/include/alsa/input.h /usr/include/alsa/output.h \
  /usr/include/alsa/error.h /usr/include/alsa/conf.h \
@@ -65,11 +70,11 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
  cpudetect.h libao2/audio_out.h mp_msg.h config.h help_mp.h \
  libao2/audio_out.h libao2/audio_out_internal.h libaf/af_format.h
 
+/usr/include/stdc-predef.h:
+
 /usr/include/errno.h:
 
 /usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/predefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
@@ -109,7 +114,7 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
 
 /usr/include/stdlib.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
@@ -121,6 +126,8 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
+
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
 /usr/include/x86_64-linux-gnu/sys/sysmacros.h:
@@ -129,9 +136,13 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
 
 /usr/include/alloca.h:
 
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
 
 /usr/include/ctype.h:
 
@@ -199,6 +210,8 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
 
 /usr/include/x86_64-linux-gnu/bits/fcntl.h:
 
+/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h:
+
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
 /usr/include/x86_64-linux-gnu/bits/fcntl2.h:
@@ -208,6 +221,8 @@ libao2/ao_alsa.o: libao2/ao_alsa.c /usr/include/errno.h \
 /usr/include/x86_64-linux-gnu/sys/poll.h:
 
 /usr/include/x86_64-linux-gnu/bits/poll.h:
+
+/usr/include/x86_64-linux-gnu/bits/poll2.h:
 
 /usr/include/alsa/asoundef.h:
 

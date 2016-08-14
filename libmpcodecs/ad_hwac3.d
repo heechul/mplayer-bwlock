@@ -1,14 +1,14 @@
-libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
+libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdc-predef.h \
+ /usr/include/stdio.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/libio.h \
  /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
@@ -17,6 +17,8 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
  /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/time.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/string.h \
  /usr/include/x86_64-linux-gnu/bits/string2.h /usr/include/endian.h \
@@ -27,7 +29,7 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/confname.h /usr/include/getopt.h \
  /usr/include/x86_64-linux-gnu/bits/unistd.h config.h mp_msg.h config.h \
  help_mp.h mpbswap.h ffmpeg/libavutil/bswap.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h /usr/include/stdint.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h ffmpeg/libavutil/avconfig.h \
  ffmpeg/libavutil/attributes.h ffmpeg/libavutil/common.h \
  /usr/include/ctype.h /usr/include/errno.h \
@@ -35,8 +37,8 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /usr/include/inttypes.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/syslimits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
  /usr/include/linux/limits.h \
@@ -59,6 +61,7 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
  ffmpeg/libavutil/bswap.h libmpcodecs/ad_internal.h codec-cfg.h \
  libaf/af_format.h stream/stream.h m_option.h stream/url.h \
  /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl2.h stream/network.h \
  /usr/include/x86_64-linux-gnu/sys/time.h \
@@ -71,6 +74,7 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/sys/uio.h \
  /usr/include/x86_64-linux-gnu/bits/uio.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h \
  /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
  /usr/include/x86_64-linux-gnu/asm/socket.h \
  /usr/include/asm-generic/socket.h \
@@ -79,17 +83,18 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/socket2.h \
  /usr/include/x86_64-linux-gnu/bits/in.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
  /usr/include/x86_64-linux-gnu/bits/netdb.h /usr/include/arpa/inet.h \
  stream/stream.h stream/http.h libmpdemux/demuxer.h sub/ass_mp.h \
  sub/subreader.h libass/ass.h libass/ass_types.h libmpdemux/stheader.h \
  libmpdemux/demuxer.h libmpdemux/aviheader.h libmpdemux/ms_hdr.h \
  libmpcodecs/ad.h libmpcodecs/mpc_info.h
 
+/usr/include/stdc-predef.h:
+
 /usr/include/stdio.h:
 
 /usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/predefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
@@ -99,7 +104,7 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
@@ -111,7 +116,7 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
@@ -132,6 +137,10 @@ libmpcodecs/ad_hwac3.o: libmpcodecs/ad_hwac3.c /usr/include/stdio.h \
 /usr/include/time.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
@@ -171,7 +180,7 @@ mpbswap.h:
 
 ffmpeg/libavutil/bswap.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -199,9 +208,9 @@ ffmpeg/libavutil/common.h:
 
 /usr/include/inttypes.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/limits.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/syslimits.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -273,6 +282,8 @@ stream/url.h:
 
 /usr/include/x86_64-linux-gnu/bits/fcntl.h:
 
+/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h:
+
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
 /usr/include/x86_64-linux-gnu/bits/fcntl2.h:
@@ -303,6 +314,8 @@ stream/network.h:
 
 /usr/include/x86_64-linux-gnu/bits/socket.h:
 
+/usr/include/x86_64-linux-gnu/bits/socket_type.h:
+
 /usr/include/x86_64-linux-gnu/bits/sockaddr.h:
 
 /usr/include/x86_64-linux-gnu/asm/socket.h:
@@ -318,6 +331,8 @@ stream/network.h:
 /usr/include/x86_64-linux-gnu/bits/in.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
 
 /usr/include/x86_64-linux-gnu/bits/netdb.h:
 

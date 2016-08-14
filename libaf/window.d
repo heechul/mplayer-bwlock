@@ -1,5 +1,5 @@
-libaf/window.o: libaf/window.c /usr/include/math.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
+libaf/window.o: libaf/window.c /usr/include/stdc-predef.h \
+ /usr/include/math.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
@@ -15,11 +15,11 @@ libaf/window.o: libaf/window.c /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-finite.h libaf/dsp.h \
  libaf/window.h libaf/filter.h
 
+/usr/include/stdc-predef.h:
+
 /usr/include/math.h:
 
 /usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/predefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 

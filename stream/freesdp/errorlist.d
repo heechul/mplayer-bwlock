@@ -1,6 +1,6 @@
 stream/freesdp/errorlist.o: stream/freesdp/errorlist.c \
- stream/freesdp/common.h /usr/include/x86_64-linux-gnu/sys/time.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
+ /usr/include/stdc-predef.h stream/freesdp/common.h \
+ /usr/include/x86_64-linux-gnu/sys/time.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
@@ -12,16 +12,16 @@ stream/freesdp/errorlist.o: stream/freesdp/errorlist.c \
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/sigset.h \
  /usr/include/x86_64-linux-gnu/bits/select2.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
  /usr/include/xlocale.h
+
+/usr/include/stdc-predef.h:
 
 stream/freesdp/common.h:
 
 /usr/include/x86_64-linux-gnu/sys/time.h:
 
 /usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/predefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
@@ -47,6 +47,6 @@ stream/freesdp/common.h:
 
 /usr/include/x86_64-linux-gnu/bits/select2.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
 
 /usr/include/xlocale.h:

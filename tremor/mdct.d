@@ -1,11 +1,11 @@
-tremor/mdct.o: tremor/mdct.c tremor/ivorbiscodec.h tremor/ogg.h \
- tremor/os_types.h /usr/include/inttypes.h /usr/include/features.h \
- /usr/include/x86_64-linux-gnu/bits/predefs.h \
+tremor/mdct.o: tremor/mdct.c /usr/include/stdc-predef.h \
+ tremor/ivorbiscodec.h tremor/ogg.h tremor/os_types.h \
+ /usr/include/inttypes.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h /usr/include/stdint.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h tremor/os.h config.h \
  /usr/include/math.h /usr/include/x86_64-linux-gnu/bits/huge_val.h \
  /usr/include/x86_64-linux-gnu/bits/huge_valf.h \
@@ -16,13 +16,14 @@ tremor/mdct.o: tremor/mdct.c tremor/ivorbiscodec.h tremor/ogg.h \
  /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
  /usr/include/x86_64-linux-gnu/bits/mathinline.h \
  /usr/include/x86_64-linux-gnu/bits/math-finite.h /usr/include/alloca.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h tremor/misc.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h tremor/misc.h \
  tremor/codec_internal.h tremor/codebook.h tremor/asm_arm.h \
  /usr/include/x86_64-linux-gnu/sys/types.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
  /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/time.h \
  /usr/include/endian.h /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
  /usr/include/x86_64-linux-gnu/sys/select.h \
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/sigset.h \
@@ -32,8 +33,12 @@ tremor/mdct.o: tremor/mdct.c tremor/ivorbiscodec.h tremor/ogg.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h tremor/mdct.h \
  tremor/mdct_lookup.h
+
+/usr/include/stdc-predef.h:
 
 tremor/ivorbiscodec.h:
 
@@ -45,8 +50,6 @@ tremor/os_types.h:
 
 /usr/include/features.h:
 
-/usr/include/x86_64-linux-gnu/bits/predefs.h:
-
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
@@ -55,7 +58,7 @@ tremor/os_types.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -87,7 +90,7 @@ config.h:
 
 /usr/include/alloca.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
 
 tremor/misc.h:
 
@@ -111,6 +114,8 @@ tremor/asm_arm.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
 
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
+
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
@@ -130,6 +135,10 @@ tremor/asm_arm.h:
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 

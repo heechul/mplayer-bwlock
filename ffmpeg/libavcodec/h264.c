@@ -2404,7 +2404,7 @@ static av_always_inline void hl_decode_mb_444_internal(H264Context *h,
 /**
  * Process a macroblock; this case avoids checks for expensive uncommon cases.
  */
-#include "bwlock.h"
+#include "../../bwlock.h"
 #define hl_decode_mb_simple(sh, bits)                          \
 static void hl_decode_mb_simple_ ## bits(H264Context *h)       \
 {                                                              \

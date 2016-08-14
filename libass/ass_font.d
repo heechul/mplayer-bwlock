@@ -1,19 +1,20 @@
-libass/ass_font.o: libass/ass_font.c config.h /usr/include/inttypes.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
+libass/ass_font.o: libass/ass_font.c /usr/include/stdc-predef.h config.h \
+ /usr/include/inttypes.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h /usr/include/ft2build.h \
- /usr/include/freetype2/freetype/config/ftheader.h \
- /usr/include/freetype2/freetype/freetype.h \
- /usr/include/freetype2/freetype/config/ftconfig.h \
- /usr/include/freetype2/freetype/config/ftoption.h \
- /usr/include/freetype2/freetype/config/ftstdlib.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/syslimits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h /usr/include/stdint.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/freetype2/ft2build.h \
+ /usr/include/freetype2/config/ftheader.h \
+ /usr/include/freetype2/freetype.h \
+ /usr/include/freetype2/config/ftconfig.h \
+ /usr/include/freetype2/config/ftoption.h \
+ /usr/include/freetype2/config/ftstdlib.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
  /usr/include/linux/limits.h \
@@ -23,10 +24,11 @@ libass/ass_font.o: libass/ass_font.c config.h /usr/include/inttypes.h \
  /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/stdlib.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/string3.h /usr/include/stdio.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
@@ -41,38 +43,32 @@ libass/ass_font.o: libass/ass_font.c config.h /usr/include/inttypes.h \
  /usr/include/x86_64-linux-gnu/bits/select2.h \
  /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h /usr/include/alloca.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/setjmp.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- /usr/include/freetype2/freetype/fterrors.h \
- /usr/include/freetype2/freetype/ftmoderr.h \
- /usr/include/freetype2/freetype/fterrdef.h \
- /usr/include/freetype2/freetype/fttypes.h \
- /usr/include/freetype2/freetype/ftsystem.h \
- /usr/include/freetype2/freetype/ftimage.h \
- /usr/include/freetype2/freetype/ftsynth.h \
- /usr/include/freetype2/freetype/ftglyph.h \
- /usr/include/freetype2/freetype/tttables.h \
- /usr/include/freetype2/freetype/ftoutln.h /usr/include/strings.h \
- libass/ass.h libass/ass_types.h libass/ass_library.h libass/ass_font.h \
- libass/ass_cache.h libass/ass_bitmap.h libass/ass_cache_template.h \
- libass/ass_fontconfig.h /usr/include/fontconfig/fontconfig.h \
+ /usr/include/freetype2/fttypes.h /usr/include/freetype2/ftsystem.h \
+ /usr/include/freetype2/ftimage.h /usr/include/freetype2/fterrors.h \
+ /usr/include/freetype2/ftmoderr.h /usr/include/freetype2/fterrdef.h \
+ /usr/include/freetype2/ftsynth.h /usr/include/freetype2/ftglyph.h \
+ /usr/include/freetype2/tttables.h /usr/include/freetype2/ftoutln.h \
+ /usr/include/strings.h libass/ass.h libass/ass_types.h \
+ libass/ass_library.h libass/ass_font.h libass/ass_cache.h \
+ libass/ass_bitmap.h libass/ass_cache_template.h libass/ass_fontconfig.h \
+ /usr/include/fontconfig/fontconfig.h \
  /usr/include/x86_64-linux-gnu/sys/stat.h \
- /usr/include/x86_64-linux-gnu/bits/stat.h /usr/include/unistd.h \
- /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
- /usr/include/x86_64-linux-gnu/bits/environments.h \
- /usr/include/x86_64-linux-gnu/bits/confname.h /usr/include/getopt.h \
- /usr/include/x86_64-linux-gnu/bits/unistd.h libass/ass_utils.h \
+ /usr/include/x86_64-linux-gnu/bits/stat.h libass/ass_utils.h \
  /usr/include/assert.h libass/ass_shaper.h libass/ass_render.h \
- /usr/include/freetype2/freetype/ftstroke.h libass/ass_drawing.h
+ /usr/include/freetype2/ftstroke.h libass/ass_drawing.h
+
+/usr/include/stdc-predef.h:
 
 config.h:
 
 /usr/include/inttypes.h:
 
 /usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/predefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
@@ -82,29 +78,29 @@ config.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h:
 
 /usr/include/stdint.h:
 
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
 
-/usr/include/ft2build.h:
+/usr/include/freetype2/ft2build.h:
 
-/usr/include/freetype2/freetype/config/ftheader.h:
+/usr/include/freetype2/config/ftheader.h:
 
-/usr/include/freetype2/freetype/freetype.h:
+/usr/include/freetype2/freetype.h:
 
-/usr/include/freetype2/freetype/config/ftconfig.h:
+/usr/include/freetype2/config/ftconfig.h:
 
-/usr/include/freetype2/freetype/config/ftoption.h:
+/usr/include/freetype2/config/ftoption.h:
 
-/usr/include/freetype2/freetype/config/ftstdlib.h:
+/usr/include/freetype2/config/ftstdlib.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/limits.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/syslimits.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -134,6 +130,8 @@ config.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
+
 /usr/include/stdlib.h:
 
 /usr/include/x86_64-linux-gnu/bits/string3.h:
@@ -146,7 +144,7 @@ config.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
@@ -180,6 +178,10 @@ config.h:
 
 /usr/include/alloca.h:
 
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
+
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
 /usr/include/setjmp.h:
@@ -188,25 +190,25 @@ config.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp2.h:
 
-/usr/include/freetype2/freetype/fterrors.h:
+/usr/include/freetype2/fttypes.h:
 
-/usr/include/freetype2/freetype/ftmoderr.h:
+/usr/include/freetype2/ftsystem.h:
 
-/usr/include/freetype2/freetype/fterrdef.h:
+/usr/include/freetype2/ftimage.h:
 
-/usr/include/freetype2/freetype/fttypes.h:
+/usr/include/freetype2/fterrors.h:
 
-/usr/include/freetype2/freetype/ftsystem.h:
+/usr/include/freetype2/ftmoderr.h:
 
-/usr/include/freetype2/freetype/ftimage.h:
+/usr/include/freetype2/fterrdef.h:
 
-/usr/include/freetype2/freetype/ftsynth.h:
+/usr/include/freetype2/ftsynth.h:
 
-/usr/include/freetype2/freetype/ftglyph.h:
+/usr/include/freetype2/ftglyph.h:
 
-/usr/include/freetype2/freetype/tttables.h:
+/usr/include/freetype2/tttables.h:
 
-/usr/include/freetype2/freetype/ftoutln.h:
+/usr/include/freetype2/ftoutln.h:
 
 /usr/include/strings.h:
 
@@ -232,18 +234,6 @@ libass/ass_fontconfig.h:
 
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
-/usr/include/unistd.h:
-
-/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
-
-/usr/include/x86_64-linux-gnu/bits/environments.h:
-
-/usr/include/x86_64-linux-gnu/bits/confname.h:
-
-/usr/include/getopt.h:
-
-/usr/include/x86_64-linux-gnu/bits/unistd.h:
-
 libass/ass_utils.h:
 
 /usr/include/assert.h:
@@ -252,6 +242,6 @@ libass/ass_shaper.h:
 
 libass/ass_render.h:
 
-/usr/include/freetype2/freetype/ftstroke.h:
+/usr/include/freetype2/ftstroke.h:
 
 libass/ass_drawing.h:

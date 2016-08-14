@@ -1,5 +1,5 @@
-mplayer.o: mplayer.c config.h /usr/include/errno.h \
- /usr/include/features.h /usr/include/x86_64-linux-gnu/bits/predefs.h \
+mplayer.o: mplayer.c /usr/include/stdc-predef.h config.h \
+ /usr/include/errno.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
@@ -7,13 +7,16 @@ mplayer.o: mplayer.c config.h /usr/include/errno.h \
  /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
  /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
- /usr/include/x86_64-linux-gnu/sys/types.h \
- /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h /usr/include/time.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h /usr/include/endian.h \
+ /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/types.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl.h \
+ /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
+ /usr/include/x86_64-linux-gnu/bits/uio.h \
+ /usr/include/x86_64-linux-gnu/sys/types.h /usr/include/time.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h /usr/include/endian.h \
  /usr/include/x86_64-linux-gnu/bits/endian.h \
  /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+ /usr/include/x86_64-linux-gnu/bits/byteswap-16.h \
  /usr/include/x86_64-linux-gnu/sys/select.h \
  /usr/include/x86_64-linux-gnu/bits/select.h \
  /usr/include/x86_64-linux-gnu/bits/sigset.h \
@@ -21,11 +24,10 @@ mplayer.o: mplayer.c config.h /usr/include/errno.h \
  /usr/include/x86_64-linux-gnu/bits/select2.h \
  /usr/include/x86_64-linux-gnu/sys/sysmacros.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/uio.h \
  /usr/include/x86_64-linux-gnu/bits/stat.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl2.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/syslimits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
  /usr/include/linux/limits.h \
@@ -40,14 +42,17 @@ mplayer.o: mplayer.c config.h /usr/include/errno.h \
  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
  /usr/include/x86_64-linux-gnu/bits/sigthread.h /usr/include/stdio.h \
  /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/sys_errlist.h \
  /usr/include/x86_64-linux-gnu/bits/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/stdio2.h /usr/include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/waitflags.h \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h /usr/include/xlocale.h \
- /usr/include/alloca.h /usr/include/x86_64-linux-gnu/bits/stdlib.h \
- /usr/include/string.h /usr/include/x86_64-linux-gnu/bits/string.h \
+ /usr/include/alloca.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string.h \
  /usr/include/x86_64-linux-gnu/bits/string2.h \
  /usr/include/x86_64-linux-gnu/bits/string3.h \
  /usr/include/x86_64-linux-gnu/bits/timex.h /usr/include/unistd.h \
@@ -66,18 +71,17 @@ mplayer.o: mplayer.c config.h /usr/include/errno.h \
  /usr/include/asm-generic/ioctl.h \
  /usr/include/x86_64-linux-gnu/bits/ioctl-types.h \
  /usr/include/x86_64-linux-gnu/sys/ttydefaults.h \
- /usr/include/x86_64-linux-gnu/sys/wait.h \
- /usr/include/x86_64-linux-gnu/sys/resource.h \
- /usr/include/x86_64-linux-gnu/bits/resource.h /usr/include/linux/rtc.h \
+ /usr/include/x86_64-linux-gnu/sys/wait.h /usr/include/linux/rtc.h \
  gui/interface.h config.h libaf/af.h libaf/af_format.h libaf/control.h \
  cpudetect.h libmpdemux/stheader.h libmpdemux/demuxer.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h /usr/include/stdint.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h stream/stream.h m_option.h \
  mp_msg.h config.h stream/url.h /usr/include/inttypes.h stream/network.h \
  /usr/include/netdb.h /usr/include/netinet/in.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h \
  /usr/include/x86_64-linux-gnu/sys/uio.h \
  /usr/include/x86_64-linux-gnu/bits/socket.h \
+ /usr/include/x86_64-linux-gnu/bits/socket_type.h \
  /usr/include/x86_64-linux-gnu/bits/sockaddr.h \
  /usr/include/x86_64-linux-gnu/asm/socket.h \
  /usr/include/asm-generic/socket.h \
@@ -115,29 +119,27 @@ mplayer.o: mplayer.c config.h /usr/include/errno.h \
  libmpcodecs/dec_audio.h libmpcodecs/dec_video.h libmpcodecs/mp_image.h \
  libmpcodecs/vd.h libmpcodecs/mp_image.h libmpcodecs/mpc_info.h \
  libmpcodecs/vf.h libmpdemux/demuxer.h libmpdemux/stheader.h \
- sub/font_load.h /usr/include/ft2build.h \
- /usr/include/freetype2/freetype/config/ftheader.h \
- /usr/include/freetype2/freetype/freetype.h \
- /usr/include/freetype2/freetype/config/ftconfig.h \
- /usr/include/freetype2/freetype/config/ftoption.h \
- /usr/include/freetype2/freetype/config/ftstdlib.h /usr/include/setjmp.h \
+ sub/font_load.h /usr/include/freetype2/ft2build.h \
+ /usr/include/freetype2/config/ftheader.h \
+ /usr/include/freetype2/freetype.h \
+ /usr/include/freetype2/config/ftconfig.h \
+ /usr/include/freetype2/config/ftoption.h \
+ /usr/include/freetype2/config/ftstdlib.h /usr/include/setjmp.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp.h \
  /usr/include/x86_64-linux-gnu/bits/setjmp2.h \
- /usr/include/freetype2/freetype/fterrors.h \
- /usr/include/freetype2/freetype/ftmoderr.h \
- /usr/include/freetype2/freetype/fterrdef.h \
- /usr/include/freetype2/freetype/fttypes.h \
- /usr/include/freetype2/freetype/ftsystem.h \
- /usr/include/freetype2/freetype/ftimage.h sub/sub.h sub/subreader.h \
- libvo/video_out.h stream/cache2.h stream/stream.h stream/stream.h \
- stream/stream_bd.h stream/stream_dvdnav.h stream/stream_radio.h \
- stream/tv.h libmpcodecs/dec_teletext.h libmpdemux/demuxer.h \
- access_mpcontext.h sub/ass_mp.h cfg-mplayer-def.h codec-cfg.h command.h \
- edl.h help_mp.h m_config.h m_option.h m_property.h m_struct.h metadata.h \
- mixer.h mp_core.h mp_fifo.h mp_msg.h mp_strings.h mpcommon.h \
- sub/subreader.h mplayer.h osdep/getch2.h osdep/timer.h parser-cfg.h \
- parser-mpcmd.h playtree.h path.h playtreeparser.h sub/spudec.h \
- libvo/video_out.h sub/vobsub.h sub/eosd.h udp_sync.h libvo/x11_common.h \
+ /usr/include/freetype2/fttypes.h /usr/include/freetype2/ftsystem.h \
+ /usr/include/freetype2/ftimage.h /usr/include/freetype2/fterrors.h \
+ /usr/include/freetype2/ftmoderr.h /usr/include/freetype2/fterrdef.h \
+ sub/sub.h sub/subreader.h libvo/video_out.h stream/cache2.h \
+ stream/stream.h stream/stream.h stream/stream_bd.h \
+ stream/stream_dvdnav.h stream/stream_radio.h stream/tv.h \
+ libmpcodecs/dec_teletext.h libmpdemux/demuxer.h access_mpcontext.h \
+ sub/ass_mp.h cfg-mplayer-def.h codec-cfg.h command.h edl.h help_mp.h \
+ m_config.h m_option.h m_property.h m_struct.h metadata.h mixer.h \
+ mp_core.h mp_fifo.h mp_msg.h mp_strings.h mpcommon.h sub/subreader.h \
+ mplayer.h osdep/getch2.h osdep/timer.h parser-cfg.h parser-mpcmd.h \
+ playtree.h path.h playtreeparser.h sub/spudec.h libvo/video_out.h \
+ sub/vobsub.h sub/eosd.h udp_sync.h libvo/x11_common.h \
  /usr/include/X11/Xlib.h /usr/include/X11/X.h \
  /usr/include/X11/Xfuncproto.h /usr/include/X11/Xosdefs.h \
  /usr/include/X11/Xutil.h /usr/include/X11/keysym.h \
@@ -149,11 +151,11 @@ mplayer.o: mplayer.c config.h /usr/include/errno.h \
  /usr/include/linux/stddef.h \
  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
- /usr/include/linux/dvb/frontend.h /usr/include/linux/dvb/version.h \
- stream/stream_dvd.h libdvdread4/dvdread/dvd_reader.h \
- libdvdread4/dvdread/ifo_types.h libdvdread4/dvdread/ifo_read.h \
- libdvdread4/dvdread/ifo_types.h libdvdread4/dvdread/nav_read.h \
- libdvdread4/dvdread/nav_types.h bwlock.h \
+ /usr/include/asm-generic/posix_types.h /usr/include/linux/dvb/frontend.h \
+ /usr/include/linux/dvb/version.h stream/stream_dvd.h \
+ libdvdread4/dvdread/dvd_reader.h libdvdread4/dvdread/ifo_types.h \
+ libdvdread4/dvdread/ifo_read.h libdvdread4/dvdread/ifo_types.h \
+ libdvdread4/dvdread/nav_read.h libdvdread4/dvdread/nav_types.h bwlock.h \
  /usr/include/x86_64-linux-gnu/sys/syscall.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
@@ -166,13 +168,13 @@ mplayer.o: mplayer.c config.h /usr/include/errno.h \
  libaf/af.h input/lirc.h libvo/aspect.h libvo/geometry.h libvo/vo_dxr2.h \
  libvo/vo_fbdev.h libvo/vo_zr.h
 
+/usr/include/stdc-predef.h:
+
 config.h:
 
 /usr/include/errno.h:
 
 /usr/include/features.h:
-
-/usr/include/x86_64-linux-gnu/bits/predefs.h:
 
 /usr/include/x86_64-linux-gnu/sys/cdefs.h:
 
@@ -194,23 +196,29 @@ config.h:
 
 /usr/include/fcntl.h:
 
-/usr/include/x86_64-linux-gnu/bits/fcntl.h:
-
-/usr/include/x86_64-linux-gnu/sys/types.h:
-
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
+/usr/include/x86_64-linux-gnu/bits/fcntl.h:
+
+/usr/include/x86_64-linux-gnu/bits/fcntl-linux.h:
+
+/usr/include/x86_64-linux-gnu/bits/uio.h:
+
+/usr/include/x86_64-linux-gnu/sys/types.h:
+
 /usr/include/time.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stddef.h:
 
 /usr/include/endian.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
 
 /usr/include/x86_64-linux-gnu/bits/byteswap.h:
+
+/usr/include/x86_64-linux-gnu/bits/byteswap-16.h:
 
 /usr/include/x86_64-linux-gnu/sys/select.h:
 
@@ -226,15 +234,13 @@ config.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
-/usr/include/x86_64-linux-gnu/bits/uio.h:
-
 /usr/include/x86_64-linux-gnu/bits/stat.h:
 
 /usr/include/x86_64-linux-gnu/bits/fcntl2.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/limits.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/limits.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include-fixed/syslimits.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include-fixed/syslimits.h:
 
 /usr/include/limits.h:
 
@@ -274,7 +280,7 @@ config.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdarg.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdarg.h:
 
 /usr/include/x86_64-linux-gnu/bits/sys_errlist.h:
 
@@ -291,6 +297,10 @@ config.h:
 /usr/include/xlocale.h:
 
 /usr/include/alloca.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib.h:
 
@@ -346,10 +356,6 @@ config.h:
 
 /usr/include/x86_64-linux-gnu/sys/wait.h:
 
-/usr/include/x86_64-linux-gnu/sys/resource.h:
-
-/usr/include/x86_64-linux-gnu/bits/resource.h:
-
 /usr/include/linux/rtc.h:
 
 gui/interface.h:
@@ -368,7 +374,7 @@ libmpdemux/stheader.h:
 
 libmpdemux/demuxer.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.6/include/stdint.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.8/include/stdint.h:
 
 /usr/include/stdint.h:
 
@@ -397,6 +403,8 @@ stream/network.h:
 /usr/include/x86_64-linux-gnu/sys/uio.h:
 
 /usr/include/x86_64-linux-gnu/bits/socket.h:
+
+/usr/include/x86_64-linux-gnu/bits/socket_type.h:
 
 /usr/include/x86_64-linux-gnu/bits/sockaddr.h:
 
@@ -560,17 +568,17 @@ libmpdemux/stheader.h:
 
 sub/font_load.h:
 
-/usr/include/ft2build.h:
+/usr/include/freetype2/ft2build.h:
 
-/usr/include/freetype2/freetype/config/ftheader.h:
+/usr/include/freetype2/config/ftheader.h:
 
-/usr/include/freetype2/freetype/freetype.h:
+/usr/include/freetype2/freetype.h:
 
-/usr/include/freetype2/freetype/config/ftconfig.h:
+/usr/include/freetype2/config/ftconfig.h:
 
-/usr/include/freetype2/freetype/config/ftoption.h:
+/usr/include/freetype2/config/ftoption.h:
 
-/usr/include/freetype2/freetype/config/ftstdlib.h:
+/usr/include/freetype2/config/ftstdlib.h:
 
 /usr/include/setjmp.h:
 
@@ -578,17 +586,17 @@ sub/font_load.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp2.h:
 
-/usr/include/freetype2/freetype/fterrors.h:
+/usr/include/freetype2/fttypes.h:
 
-/usr/include/freetype2/freetype/ftmoderr.h:
+/usr/include/freetype2/ftsystem.h:
 
-/usr/include/freetype2/freetype/fterrdef.h:
+/usr/include/freetype2/ftimage.h:
 
-/usr/include/freetype2/freetype/fttypes.h:
+/usr/include/freetype2/fterrors.h:
 
-/usr/include/freetype2/freetype/ftsystem.h:
+/usr/include/freetype2/ftmoderr.h:
 
-/usr/include/freetype2/freetype/ftimage.h:
+/usr/include/freetype2/fterrdef.h:
 
 sub/sub.h:
 
@@ -717,6 +725,8 @@ stream/dvbin.h:
 /usr/include/x86_64-linux-gnu/asm/posix_types.h:
 
 /usr/include/x86_64-linux-gnu/asm/posix_types_64.h:
+
+/usr/include/asm-generic/posix_types.h:
 
 /usr/include/linux/dvb/frontend.h:
 
